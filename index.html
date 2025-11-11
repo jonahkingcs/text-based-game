@@ -7,51 +7,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Get a Job!</title>
 </head>
-<body class="min-h-screen">
-    <div class="container bg-yellow-50 mx-auto px-4 py-8 max-w-2xl">
-        <div class="bg-yellow-50 rounded-lg shadowlg p-6">
-            <h1 class="header">It's time to get a job!</h1>
-            <div id="details" class="space-y-4">
-                <div class="bg-gray-200 border-2 border-b-black border-r-black border-t-gray-300 border-l-gray-300">
-                    <div class="border-[3px] border-b-gray-400 border-r-gray-400 border-t-white border-l-white">
-                        <div class="bg-gray-300 p-1">
-                            <div class="min-h-2 p-1 bg-blue-900">
-                                <p class="blueBannerText pl-2 py-1">Alert</p>
-                            </div>
-                            <p id="textarea" class="textarea">Hello there<br><br>Welcome to the game "Get a Job!" where the goal is to arrive at your interview on time. The problem is, you cannot remember where on earth the job interview is taking place and time is ticking.
-                            <br><br>
-                            Explore University of Sheffield buildings to look for clues and seek advice from familiar faces to arrive at your job interview before time runs out.
-                            If you are late, you are bound to lose the job to someone who bothered to show up.
-                            <br><br>
-                            Hurry, enter your name and begin!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-200 border-2 border-b-black border-r-black border-t-gray-300 border-l-gray-300">
-                    <div class="border-[3px] border-b-gray-400 border-r-gray-400 border-t-white border-l-white">
-                        <div class="bg-gray-300 p-1">
-                            <div class="min-h-2 p-1 bg-blue-900">
-                                <p class="blueBannerText pl-2 py-1">Alert</p>
-                            </div>
-                            <div class="px-12 py-6">
-                                <label for="username" class="textarea">Enter your name:</label>
-                                <div class="pt-6">
-                                    <div class="bg-gray-200 border-2 border-b-black border-r-black border-t-gray-300 border-l-gray-300">
-                                        <div class="border-[3px] border-b-gray-400 border-r-gray-400 border-t-white border-l-white flex flex-col">
-                                            <input type="text" id="username" class="flex-1 py-1 pl-4 bg-gray-200
-                                            focus:outline-none focus:ring-2 focus:ring-gray-800"
-                                            placeholder="Please enter your name"/>
-                                        </div>     
-                                    </div>                        
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <body class="min-h-screen">
+        <div id="main" class="container bg-yellow-50 mx-auto px-4 py-8 max-w-2xl">
+            
         </div>
-    </div>
-
-    
-</body>
+        <!-- link to external JavaScript -->
+        <script src="game.js"></script>
+    </body>
 </html>
