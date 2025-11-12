@@ -1,3 +1,16 @@
+const state = {
+    "currentRoom": null
+}
+
+// Wires buttons to functions
+site.addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;   // If a button was not pressed, return
+
+    // Continues to next question when the continue button is pressed
+    // if (btn.name === "action" && btn.value === "start") continueAfterSelection();
+});
+
 class Room {
     #name;
     #dialog;
@@ -132,12 +145,36 @@ function titleScreen() {
             </div>`;
 }
 
+function linkedRoomDialog() {
+    roomOptions = ``;
+    const currentRoom = state["currentRoom"];
+    const linked = currentRoom.linkedRooms;
 
+    if (linked['north']) {
+        roomOptions += `North: ${linked['north'].name}<br><br>`
+    }
+    if (linked['east']) {
+        roomOptions += `East: ${linked['east'].name}<br><br>`
+    }
+    if (linked['south']) {
+        roomOptions += `South: ${linked['south'].name}<br><br>`
+    }
+    if (linked['west']) {
+        roomOptions += `West: ${linked['west'].name}<br><br>`
+    }
+
+    console.log(roomOptions)
+
+}
 
 function startGame() {
-    main.innerHTML = titleScreen();
+    const site = document.getElementById("main");
+    site.innerHTML = titleScreen();
 
+    // Character initialisation
     const Mark = new Character("Mark", "Welcome to the Mappin Building! I would like to assist you", "Leave");
+
+    // Room initialisation
     const Mappin = new Room("The Mappin Building", "This can't be the right place, there is no laboratory", {}, Mark, null, "/images/mappin.png");
     const Heartspace = new Room("The Heartspace", "No seats left, it is packed!", {}, null, null, "/images/heartspace.png");
     const BroadLane = new Room("Broad Lane Court", "Just another student accom", {}, null, null, "/images/broad_lane.png");
@@ -145,9 +182,31 @@ function startGame() {
     const Regent = new Room("Regent Court", "This is my accomodation", {}, null, null, "/images/regent.png");
     const WestCourt = new Room("West Court", "Not sure where to go from here", {}, null, null, "/images/west_court.png");
     const StGeorges = new Room("St George's", "I cannot believe this is a lecture theatre", {}, null, null, "/images/st_georges.png");
+    const GeorgePorter = new Room("The George Porter Building", "This is quite far away from The Diamond", {}, null, null, "/images/george_porter.png");
+
+    // Linking rooms together
+    Diamond.linkedRooms = {"east": StGeorges};
+    StGeorges.linkedRooms = {"east": Mappin, "west": Diamond};
+    Mappin.linkedRooms = {"north": BroadLane, "east": Heartspace, "south": Regent, "west": StGeorges};
+    Heartspace.linkedRooms = {"north": GeorgePorter, "south": WestCourt, "west": Mappin};
+    BroadLane.linkedRooms = {"east": GeorgePorter, "south": Mappin};
+    Regent.linkedRooms = {"north": Mappin, "east": WestCourt};
+    GeorgePorter.linkedRooms = {"south": Heartspace, "west": BroadLane}
+    WestCourt.linkedRooms = {"north": Heartspace, "west": Regent}
+
+    
+
     Mappin.printCharacter();
     console.log(Heartspace.dialog);
+    console.log(Mappin.linkedRooms);
+    console.log(StGeorges.linkedRooms);
+    console.log("here")
+    console.log(StGeorges.linkedRooms['east'])
+    console.log("he")
 
+
+    state["currentRoom"] = Mappin
+    linkedRoomDialog()
 }
 
 window.onload = startGame;
