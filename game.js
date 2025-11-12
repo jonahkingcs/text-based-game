@@ -4,13 +4,15 @@ class Room {
     #linkedRooms;
     #character;
     #items;
+    #background;
 
-    constructor(name, dialog, linkedRooms, character, items) {
+    constructor(name, dialog, linkedRooms, character, items, background) {
         this.#name = name;
         this.#dialog = dialog;
         this.#linkedRooms = linkedRooms;
         this.#character = character;
         this.#items = items;
+        this.#background = this.#background;
     }
 
     get name() {
@@ -33,12 +35,24 @@ class Room {
         return this.#items;
     }
 
+    get background() {
+        return this.#background;
+    }
+
     set name(name) {
         this.#name = name;
     }
 
     set dialog(dialog) {
         this.#dialog = dialog;
+    }
+
+    set linkedRooms(linkedRooms) {
+        this.#linkedRooms = linkedRooms;
+    }
+
+    printCharacter() {
+        console.log(`${this.#character.name} says ${this.#character.dialog}`)
     }
 }
 
@@ -123,13 +137,17 @@ function titleScreen() {
 function startGame() {
     main.innerHTML = titleScreen();
 
-    const Mark = new Character("Mark", "Hello", "Leave");
+    const Mark = new Character("Mark", "Welcome to the Mappin Building! I would like to assist you", "Leave");
+    const Mappin = new Room("The Mappin Building", "This can't be the right place, there is no laboratory", {}, Mark, null, "/images/mappin.png");
+    const Heartspace = new Room("The Heartspace", "No seats left, it is packed!", {}, null, null, "/images/heartspace.png");
+    const BroadLane = new Room("Broad Lane Court", "Just another student accom", {}, null, null, "/images/broad_lane.png");
+    const Diamond = new Room("The Diamond", "The enigneering building sounds close", {}, null, null, "/images/diamond.png");
+    const Regent = new Room("Regent Court", "This is my accomodation", {}, null, null, "/images/regent.png");
+    const WestCourt = new Room("West Court", "Not sure where to go from here", {}, null, null, "/images/west_court.png");
+    const StGeorges = new Room("St George's", "I cannot believe this is a lecture theatre", {}, null, null, "/images/st_georges.png");
+    Mappin.printCharacter();
+    console.log(Heartspace.dialog);
 
-    console.log(Mark.speak());
-
-    Mark.name = "Helen";
-
-    console.log(Mark.speak());
 }
 
 window.onload = startGame;
