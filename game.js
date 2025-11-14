@@ -18,6 +18,7 @@ site.addEventListener("click", (e) => {
     if (btn.name === "action" && btn.value === "go") nextRoom();
 });
 
+// Room class with name, dialog, linkedRooms stores surrounding rooms in dictionary, items, background saves URL of png from images file
 class Room {
     #name;
     #dialog;
@@ -66,6 +67,7 @@ class Room {
     }
 }
 
+// Renders HTML for the titleScreen with a start button
 function titleScreen() {
     startButton = `<button type="button"
                 name="action" value="start"
@@ -127,6 +129,7 @@ function titleScreen() {
             </div>`;
 }
 
+// Creates dialog for the current rooms linked room options
 function linkedRoomDialog() {
     let roomOptions = ``;
     const currentRoom = state["currentRoom"];
@@ -149,6 +152,7 @@ function linkedRoomDialog() {
 
 }
 
+// Sets the first room after user enters a username
 function begin() {
     const input = document.getElementById("username");
     const username = (input?.value || "").trim();
@@ -161,41 +165,45 @@ function begin() {
     setRoom();
 }
 
+// Renders current room HTML with correct dialog and room names
 function setRoom() {
+    // Create the go button HTML
     goButton = `<button type="button"
                     name="action" value="go"
                     class="w-full px-8 py-6 transition
                         hover:shadow-xl textarea">Enter
                 </button>`
 
+    // Load attributes of the current room to render
     const roomOptions = linkedRoomDialog();
     const dialog = state["currentRoom"].dialog;
     const roomName = state["currentRoom"].name;
     const timeRemaining = state["time"]
     const bannerText = `${roomName} - ${timeRemaining} minutes remaining`
-
     const background = state["currentRoom"].background;
 
     console.log(dialog)
 
     if (roomName === "Regent Court") {
-        Regent.dialog = "Back at my apartment. Now is not the time to have a nap. I got to get out of here!";
+        Regent.dialog = "Back at my apartment. Now is not the time to have a nap. I got to get out of here!";   // Changes original room dialog after first entry
     } else if (roomName === "The Diamond" && state["win"]) {
         const win = true;
-        showPopUp(win);
+        showPopUp(win);     // If win is true and you re-enter the diamond then it renders the win pop up
     } else if (roomName === "The Diamond") {
-        Heartspace.dialog = "You skid to the desk, wheeze 'KEYCARD PLEASE', and the receptionist prints one like a hero. Access granted. Now sprint before your future evaporates.";
-        Diamond.items.push("Knowledge");
+        Heartspace.dialog = "You skid to the desk, wheeze 'KEYCARD PLEASE', and the receptionist prints one like a hero. Access granted. Now sprint before your future evaporates.";    // Change dialog of the Heartspace when getting intel from the Diamond
+        Diamond.items.push("Knowledge");    // Add the Knowledge item to the Diamond to allow checking of already visiting the diamond
     } else if (roomName === "The Heartspace" && (Diamond.items).includes("Knowledge")) {
-        Diamond.dialog = `Bleep. Door opens. You stumble in, breathless. The panel of interviewers looks up and says, "You showed up on time under pressure? You're hired". Well that was easy.`;
-        state["win"] = true;
+        Diamond.dialog = `Bleep. Door opens. You stumble in, breathless. The panel of interviewers looks up and says, "You showed up on time under pressure? You're hired". Well that was easy.`;   // Change the Diamond dialog to winning text when you re-enter after getting the keycard from the Heartspace
+        state["win"] = true;    // Change win condition to true so win pop up is triggered when re-entering the Diamond
     }
 
+    // Render loss pop up if time reaches 0
     if (state["time"] <= 0) {
         const win = false;
         showPopUp(win);
     }
 
+    // Render HTML of current room
     site.innerHTML = `<div class="bg-[url(${background})] rounded-lg shadowlg p-6">
                 <h1 class="header pb-80">It's time to get a job!</h1>
                 <div id="details" class="space-y-4">
@@ -236,6 +244,7 @@ function setRoom() {
             </div>`;
 }
 
+// Loads the room of the new direction entered by the user
 function nextRoom() {
     // Retrieve direction from user input and standardise its value to lowercase
     const input = document.getElementById("direction");
@@ -254,6 +263,7 @@ function nextRoom() {
     }
 }
 
+// Renders win pop up
 function showPopUp(win) {
     // Create overlay container
     const overlay = document.createElement("div");
@@ -263,13 +273,12 @@ function showPopUp(win) {
     let message = "";
 
     if (win === true) {
-        title = `Well done ${state["username"]}... YOU WIN!`
+        title = `Well done ${state["username"]}... YOU WIN!`    // Gives custom win message to the user
         message = "You got the job. They hired you for showing up under pressure!";
     } else {
-        title = `Too bad ${state.username}... YOU LOSE :(`
+        title = `Too bad ${state.username}... YOU LOSE :(`      // Gives custom loss message to the user
         message = "OH NO. You ran out of time. The employers decided to go with somebody who bothers to show up to the job. Use this as a learning opportunity!";
-    }
-    
+    } 
 
     // HTML content
     overlay.innerHTML = `
@@ -302,6 +311,7 @@ function showPopUp(win) {
     };
 }
 
+// Renders the title screen when the web page is loaded
 function startGame() {
     site.innerHTML = titleScreen();
 }
