@@ -3,7 +3,7 @@ const state = {
     "currentRoom": null,
     "username": null,
     "win": false,
-    "time": 60
+    "time": 100
 };
 
 const site = document.getElementById("main");
@@ -237,8 +237,6 @@ function setRoom() {
 }
 
 function nextRoom() {
-    state["time"] -= 5;
-
     // Retrieve direction from user input and standardise its value to lowercase
     const input = document.getElementById("direction");
     const direction = (input?.value || "").trim().toLowerCase();
@@ -249,6 +247,7 @@ function nextRoom() {
 
     // Load new room if direction exists in linked rooms dictionary
     if (linked[direction]) {
+        state["time"] -= 5;
         console.log("thatn");
         state["currentRoom"] = linked[direction];
         setRoom();
