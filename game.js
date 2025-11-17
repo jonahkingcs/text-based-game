@@ -76,7 +76,7 @@ function titleScreen() {
                         hover:shadow-xl textarea">Start
         </button>`
     
-    return `<div class="bg-[url(/images/heartspace.png)] rounded-lg shadowlg p-6">
+    return `<div class="bg-[url(images/heartspace.png)] rounded-lg shadowlg p-6">
                 <h1 class="header">It's time to get a job!</h1>
                 <div id="details" class="space-y-4">
                     <div class="bg-gray-200 border-2 border-b-black border-r-black border-t-gray-300 border-l-gray-300">
