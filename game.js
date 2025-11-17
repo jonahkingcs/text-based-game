@@ -319,28 +319,28 @@ function startGame() {
 // Room initialisation
 const Mappin = new Room(
     "The Mappin Building", "Oh yeah, I've found the centre of campus. You can get practically anywhere from here. Unfortunately, I need to get to exactly one place, and fast. Which way feels like employment awaits?",
-    {}, null, "/images/mappin.png");
+    {}, null, "images/mappin.png");
 const Heartspace = new Room(
     "The Heartspace", "You spot a receptionist with a 'can solve your life in 30 seconds' energy. Might be handy later. Mental note for future me.",
-    {}, null, "/images/heartspace.png");
+    {}, null, "images/heartspace.png");
 const BroadLane = new Room(
     "Broad Lane Court", "Mate: Didn't you say last week it was at The Diamond? Great. Diamond. Ooo shiny. RUN!",
-    {}, null, "/images/broad_lane.png");
+    {}, null, "images/broad_lane.png");
 const Diamond = new Room(
     "The Diamond", "Darn the doors are locked and I spot a stern scanner requiring a keycard. I must find a competent member of staff who can print one. Tick, tock!",
-    {}, [], "/images/diamond.png");
+    {}, [], "images/diamond.png");
 const Regent = new Room(
     "Regent Court", "OH NO. I overslept! Interview in… somewhere? Grab shoes, grab dignity, and sprint to find the building before they hire someone who can read a calendar.",
-    {}, null, "/images/regent.png");
+    {}, null, "images/regent.png");
 const WestCourt = new Room(
     "West Court", "A group of students laugh: 'Mate, this is a flat block. No interviews here unless you're applying to be a pool table'. Right. Wrong place. Rude people. Keep moving.",
-    {}, null, "/images/west_court.png");
+    {}, null, "images/west_court.png");
 const StGeorges = new Room(
     "St George's", "It's absolute chaos. Bags, coffees, and existential dread flying everywhere. Everyone's rushing to lectures while I speedrun a life decision. Out of my way people!",
-    {}, null, "/images/st_georges.png");
+    {}, null, "images/st_georges.png");
 const GeorgePorter = new Room(
     "The George Porter Building", "This place feels… abandoned. Echoes, peeling posters, one lonely pigeon doing security. Pretty sure no interviews are happening in this liminal space.",
-    {}, null, "/images/george_porter.png");
+    {}, null, "images/george_porter.png");
 
 // Linking rooms together
 Diamond.linkedRooms = {"east": StGeorges};
